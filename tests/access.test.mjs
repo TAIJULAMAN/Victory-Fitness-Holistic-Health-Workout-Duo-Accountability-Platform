@@ -70,3 +70,13 @@ test('public-route recovery ignores unauthenticated users and protected routes',
   assert.equal(getAuthenticatedPublicRouteTarget('/onboarding', null), null);
   assert.equal(getAuthenticatedPublicRouteTarget('/profile', user), null);
 });
+
+test('signed-in home does not redirect to itself when Expo hides the tabs group', () => {
+  const active = { ...user, subscription_status: 'ACTIVE' };
+  assert.equal(getAuthenticatedPublicRouteTarget('/', active, '(tabs)'), null);
+  assert.equal(getAuthenticatedPublicRouteTarget('/', active, undefined), '/(tabs)');
+  assert.equal(getAuthenticatedPublicRouteTarget('/welcome', active, '(auth)'), '/(tabs)');
+  assert.equal(getAuthenticatedPublicRouteTarget('/', { ...active, subscription_status: 'EXPIRED' }, '(tabs)'), '/plan');
+  assert.equal(getAuthenticatedPublicRouteTarget('/', { ...active, onboarding_completed: false }, '(tabs)'), '/onboarding');
+  assert.equal(getAuthenticatedPublicRouteTarget('/', { ...active, is_admin: true }, '(tabs)'), '/login');
+});

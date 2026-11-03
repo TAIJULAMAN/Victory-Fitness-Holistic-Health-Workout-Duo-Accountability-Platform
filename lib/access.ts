@@ -439,12 +439,19 @@ export function getPostAuthRoute(
 export function getAuthenticatedPublicRouteTarget(
   pathname: string,
   user?: Parameters<typeof getPostAuthRoute>[0],
+  routeGroup?: string,
 ): string | null {
   if (!user || !isPublicRoute(pathname)) {
     return null;
   }
 
   const target = user.onboarding_completed ? getPostAuthRoute(user) : '/onboarding';
+  // Expo removes route groups from usePathname(): both the welcome index and
+  // the signed-in tabs index are '/'. Do not replace an already-mounted home
+  // with itself, which remounts the guard and repeats the profile request.
+  if (pathname === '/' && routeGroup === '(tabs)' && target === '/(tabs)') {
+    return null;
+  }
   return pathname === target ? null : target;
 }
 

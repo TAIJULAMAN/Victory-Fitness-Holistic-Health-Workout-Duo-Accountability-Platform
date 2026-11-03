@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Stack, usePathname, useRouter } from 'expo-router';
+import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator, AppState, Platform, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { FontDisplay, useFonts } from 'expo-font';
@@ -38,6 +38,7 @@ export function ErrorBoundary({ error, retry }: { error: Error; retry: () => voi
 export default function RootLayout() {
   const router = useRouter();
   const pathname = usePathname();
+  const routeGroup = useSegments()[0];
   const pathnameRef = useRef(pathname);
   const hrefRef = useRef(pathname);
   const lastLoggedRouteRef = useRef<string | null>(null);
@@ -205,7 +206,7 @@ export default function RootLayout() {
         }
 
         if (isPublicRoute(pathname)) {
-          const target = getAuthenticatedPublicRouteTarget(pathname, user);
+          const target = getAuthenticatedPublicRouteTarget(pathname, user, routeGroup);
           if (!target) {
             setCheckingAccess(false);
             return false;
@@ -313,7 +314,7 @@ export default function RootLayout() {
     return () => {
       cancelled = true;
     };
-  }, [biometricUnlockNonce, fontsReady, pathname, router]);
+  }, [biometricUnlockNonce, fontsReady, pathname, routeGroup, router]);
 
   useEffect(() => {
     pathnameRef.current = pathname;

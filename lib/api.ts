@@ -1093,12 +1093,10 @@ export async function fetchCurrentUser(options?: { forceRefresh?: boolean }) {
     throw new ApiError(401, 'Authentication required');
   }
 
-  if (options?.forceRefresh) {
-    currentUserRequestPromise = null;
-  }
-
+  // Force refresh bypasses the settled cache, not an already-running request.
+  // Root, index and module guards can all verify the session concurrently.
   if (!currentUserRequestPromise) {
-    currentUserRequestPromise = apiRequest<AuthUser & { role?: string; is_admin?: boolean; country?: string; country_code?: string | null; contact_number?: string | null; profileImage?: string }>('/me')
+    const request = apiRequest<AuthUser & { role?: string; is_admin?: boolean; country?: string; country_code?: string | null; contact_number?: string | null; profileImage?: string }>('/me')
       .then(async (user) => {
         const previousUserKey = getAuthUserScopedKey();
         authUser = normalizeAuthUser(user);
@@ -1117,8 +1115,11 @@ export async function fetchCurrentUser(options?: { forceRefresh?: boolean }) {
         throw error;
       })
       .finally(() => {
-        currentUserRequestPromise = null;
+        if (currentUserRequestPromise === request) {
+          currentUserRequestPromise = null;
+        }
       });
+    currentUserRequestPromise = request;
   }
 
   return currentUserRequestPromise;

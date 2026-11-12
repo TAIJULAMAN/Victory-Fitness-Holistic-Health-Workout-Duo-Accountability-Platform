@@ -39,20 +39,20 @@
   <a href="#overview"><b>Explore Platform</b></a> &nbsp;•&nbsp;
   <a href="#architecture"><b>Architecture</b></a> &nbsp;•&nbsp;
   <a href="#core-features"><b>Core Features</b></a> &nbsp;•&nbsp;
-  <a href="https://github.com/iam-rajuan/victory-fitness-app/issues"><b>Report Bug</b></a> &nbsp;•&nbsp;
-  <a href="https://github.com/iam-rajuan/victory-fitness-app/issues"><b>Request Feature</b></a>
+  <a href="https://github.com/TAIJULAMAN/Victory-Fitness-Holistic-Health-Workout-Duo-Accountability-Platform/issues"><b>Report Bug</b></a> &nbsp;•&nbsp;
+  <a href="https://github.com/TAIJULAMAN/Victory-Fitness-Holistic-Health-Workout-Duo-Accountability-Platform/issues"><b>Request Feature</b></a>
 </p>
 
 <br />
 
 <!-- Hero Banner Graphic -->
-<img src="./assets/images/onboarding/welcome-bg.jpg" alt="Victory Fitness Platform Overview" width="100%" />
+<img src="./assets/preview/hero-banner.jpg" alt="Victory Fitness Platform Overview" width="100%" />
 
 </div>
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
 - [ Title & Value Proposition](#overview)
 - [ Tech Stack Badges](#tech-stack)
@@ -70,7 +70,6 @@
   - [ System Architecture Overview](#system-architecture)
   - [ Platform Role & Capability Matrix](#capability-matrix)
 - [ Project Directory Structure](#project-structure)
-- [ Local Development & Setup](#local-setup)
 - [ Developer Info & Socials](#developer-info)
 - [ License & Proprietary Notice](#license)
 
@@ -78,25 +77,25 @@
 
 <a id="interface-preview"></a>
 
-## 🖼️ Interface Preview & Onboarding Experience
+## Interface Preview & Onboarding Experience
 
 Discover role-tailored fitness journeys, biometric data synchronization, and social challenge leaderboards engineered with Expo SDK 54, React Native Web, and Zustand.
 
-|                                **Precision Tracking & Biometrics**                                |                                    **Performance First Training**                                  |
-| :------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| <img src="./assets/images/onboarding/precision-tracking.png" alt="Precision Tracking" width="480" /> | <img src="./assets/images/onboarding/performance-first.png" alt="Performance First" width="480" />   |
-|                    _Real-time HealthKit steps, active calories & heart rate monitoring_            |                        _Targeted strength wizards, rep logging & rest timers_                      |
+|                                   **Precision Tracking & Biometrics**                                   |                                    **Performance First Training**                                    |
+| :-----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: |
+| <img src="./assets/preview/precision-tracking.jpg" alt="Precision Tracking & Biometrics" width="480" /> | <img src="./assets/preview/performance-training.jpg" alt="Performance First Training" width="480" /> |
+|          _Real-time HealthKit & Health Connect steps, active calories & heart rate monitoring_          |             _Targeted strength wizards, exercise form guides, rep logging & rest timers_             |
 
-|                                 **Stronger Together: Duo Mode**                                    |                                    **Official Brand Identity**                                     |
-| :------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| <img src="./assets/images/onboarding/stronger-together.png" alt="Duo Workouts" width="480" />        |        <img src="./assets/logo_light.png" alt="Victory Fitness Official Logo" width="280" />       |
-|                  _Accountability partner matching, duo workouts & mutual motivation_               |                     _Modern athletic branding optimized for mobile and web PWA_                    |
+|                                   **Stronger Together: Duo Mode**                                   |                            **Community Challenges & Leaderboards**                             |
+| :-------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
+| <img src="./assets/preview/duo-accountability.jpg" alt="Stronger Together: Duo Mode" width="480" /> | <img src="./assets/preview/community-challenges.jpg" alt="Community Challenges" width="480" /> |
+|              _Accountability partner matching, synchronized streaks & mutual cheering_              |          _Monthly community challenges, activity progress & dynamic podium rankings_           |
 
 ---
 
 <a id="core-features"></a>
 
-## ✨ Core Features & Platform Modules
+## Core Features & Platform Modules
 
 Victory Fitness unites physical training, nutrition science, and peer accountability into an integrated lifestyle platform.
 
@@ -158,7 +157,7 @@ Victory Fitness unites physical training, nutrition science, and peer accountabi
 
 <a id="architecture"></a>
 
-## 🏗️ Engineering Highlights & Architecture
+## Engineering Highlights & Architecture
 
 <a id="system-architecture"></a>
 
@@ -167,47 +166,49 @@ Victory Fitness unites physical training, nutrition science, and peer accountabi
 Victory Fitness bridges native iOS/Android mobile runtimes and modern web browsers through a unified Expo codebase powered by Zustand stores.
 
 ```
+
 +-----------------------------------------------------------------------------------+
-|                        Client Layer (React Native / Expo SDK 54)                  |
-|   Expo Router v6 │ React 19 │ TypeScript │ Zustand Stores │ React Native Web      |
+| Client Layer (React Native / Expo SDK 54) |
+| Expo Router v6 │ React 19 │ TypeScript │ Zustand Stores │ React Native Web |
 +-----------------------------------------------------------------------------------+
-                         │                                    │
-          ┌──────────────┴──────────────┐      ┌──────────────┴──────────────┐
-          ▼                             ▼      ▼                             ▼
-+-------------------+         +-------------------+         +-------------------+
-|  Health Sync API  |         |  Device Hardware  |         | Deployment / PWA  |
-|  Apple HealthKit  |         | Biometrics/FaceID |         | Vercel SPA Export |
-|  Health Connect   |         | Expo Audio Engine |         | Service Worker SW |
-| Steps & Calories  |         | Push Notifications|         | Web Push Engine   |
-+-------------------+         +-------------------+         +-------------------+
-                         │                                    │
-                         ▼                                    ▼
+│ │
+┌──────────────┴──────────────┐ ┌──────────────┴──────────────┐
+▼ ▼ ▼ ▼
++-------------------+ +-------------------+ +-------------------+
+| Health Sync API | | Device Hardware | | Deployment / PWA |
+| Apple HealthKit | | Biometrics/FaceID | | Vercel SPA Export |
+| Health Connect | | Expo Audio Engine | | Service Worker SW |
+| Steps & Calories | | Push Notifications| | Web Push Engine |
++-------------------+ +-------------------+ +-------------------+
+│ │
+▼ ▼
 +-----------------------------------------------------------------------------------+
-|                        Backend & Cloud API Integration Layer                      |
-|   RESTful Endpoints │ JWT Bearer Auth │ Duo WebSockets │ Firebase Cloud Messaging |
+| Backend & Cloud API Integration Layer |
+| RESTful Endpoints │ JWT Bearer Auth │ Duo WebSockets │ Firebase Cloud Messaging |
 +-----------------------------------------------------------------------------------+
+
 ```
 
 <a id="capability-matrix"></a>
 
 ### Platform Role & Capability Matrix
 
-| Feature / Domain             | Free Member | Premium Athlete | Workout Duo | Admin Staff |
-| :--------------------------- | :---------: | :-------------: | :---------: | :---------: |
-| **Basic Workout Library**    | Full Access |   Full Access   | Full Access | Full Access |
-| **HealthKit / Health Connect**| Full Access |   Full Access   | Full Access | Full Access |
-| **Strength & Video Wizards** | 2 Plans Max |    Unlimited    |  Unlimited  | Full Access |
-| **Duo Partner Matching**     |      ❌     |   Full Access   | Full Access | Full Access |
-| **Community Challenges**     | Join Public |   Join & Create | Join & Create| Full Access|
-| **Biometric FaceID Unlock**  | Full Access |   Full Access   | Full Access | Full Access |
-| **Challenge Administration** |      ❌     |        ❌       |      ❌     | Full Access |
-| **Global Analytics**         |      ❌     |        ❌       |      ❌     | Full Access |
+| Feature / Domain               | Free Member | Premium Athlete |  Workout Duo  | Admin Staff |
+| :----------------------------- | :---------: | :-------------: | :-----------: | :---------: |
+| **Basic Workout Library**      | Full Access |   Full Access   |  Full Access  | Full Access |
+| **HealthKit / Health Connect** | Full Access |   Full Access   |  Full Access  | Full Access |
+| **Strength & Video Wizards**   | 2 Plans Max |    Unlimited    |   Unlimited   | Full Access |
+| **Duo Partner Matching**       |     ❌      |   Full Access   |  Full Access  | Full Access |
+| **Community Challenges**       | Join Public |  Join & Create  | Join & Create | Full Access |
+| **Biometric FaceID Unlock**    | Full Access |   Full Access   |  Full Access  | Full Access |
+| **Challenge Administration**   |     ❌      |       ❌        |      ❌       | Full Access |
+| **Global Analytics**           |     ❌      |       ❌        |      ❌       | Full Access |
 
 ---
 
 <a id="project-structure"></a>
 
-## 📂 Project Directory Structure
+## Project Directory Structure
 
 ```plaintext
 victory-fitness-app/
@@ -233,6 +234,7 @@ victory-fitness-app/
 │   ├── _layout.tsx                     # Root app layout, providers, fonts & auth gates
 │   └── +html.tsx                       # Custom HTML shell for web export & PWA meta tags
 ├── assets/                             # High-resolution logos, workout imagery & audio files
+│   ├── preview/                        # High-resolution UI mockup previews & hero banner
 │   ├── images/
 │   │   └── onboarding/                 # Onboarding illustrations (Precision tracking, Duo mode)
 │   ├── sounds/                         # Rest timer audio alerts & countdown sound effects
@@ -268,55 +270,9 @@ victory-fitness-app/
 
 <a id="local-setup"></a>
 
-## 💻 Local Development & Setup
-
-### Prerequisites
-
-- **Node.js**: v20 LTS or later
-- **JDK 17**: Required for Android native builds
-- **Xcode & CocoaPods**: macOS only (for iOS native run)
-- **Android Studio & SDK**: Configured with `ANDROID_HOME`
-
-### Installation & Execution
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/iam-rajuan/victory-fitness-app.git
-   cd victory-fitness-app
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables:**
-   Copy the example environment file:
-   ```bash
-   cp .env.example .env
-   ```
-   Define your backend endpoint:
-   ```env
-   EXPO_PUBLIC_API_URL=https://api.victoryfitness.example.com
-   ```
-
-4. **Launch Application:**
-   ```bash
-   npx expo run:android         # Launch on Android device / emulator
-   npx expo run:ios             # Launch on iOS simulator (macOS only)
-   npm run web                  # Launch local web development server
-   ```
-
-5. **Build for Vercel (PWA Export):**
-   ```bash
-   npm run build:web
-   ```
-
----
-
 <a id="developer-info"></a>
 
-## 👨‍💻 Developer Info & Socials
+## Developer Info & Socials
 
 Victory Fitness is designed, engineered, and maintained by experienced full-stack and mobile software engineers.
 
@@ -324,11 +280,15 @@ Victory Fitness is designed, engineered, and maintained by experienced full-stac
   - 🌐 GitHub: [@iam-rajuan](https://github.com/iam-rajuan)
   - 📧 Email: [rajuan.official@gmail.com](mailto:rajuan.official@gmail.com)
 
+- **Md Shah Aman Patwary** — _Full-Stack Software Engineer & Architectural Contributor_
+  - 🌐 GitHub: [@TAIJULAMAN](https://github.com/TAIJULAMAN)
+  - 📧 Email: [mdshahamanpatwary@gmail.com](mailto:mdshahamanpatwary@gmail.com)
+
 ---
 
 <a id="license"></a>
 
-## 📄 License & Proprietary Notice
+## License & Proprietary Notice
 
 Copyright © 2026 Victory Fitness. All rights reserved.
 
